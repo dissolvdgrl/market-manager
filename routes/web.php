@@ -15,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::view('/market-calendar', 'market-calendar')->name('market-calendar');
+    Route::view('/apply', 'apply')->name('apply');
+    Route::view('/bookings', 'bookings')->name('bookings');
+    Route::view('/receipts', 'receipts')->name('receipts');
 });

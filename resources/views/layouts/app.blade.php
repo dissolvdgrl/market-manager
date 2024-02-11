@@ -18,6 +18,23 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
+
+        @auth
+            @if (! Auth::user()->hasVerifiedEmail())
+                <div class="p-2 text-center bg-rose-500 flex items-center justify-center gap-4">
+                    <p class="text-white font-medium text-xl">Please verify your email address to continue using the app.</p>
+                    <form method="POST" action="{{ route('verification.send') }}">
+                        @csrf
+
+                        <div>
+                            <x-button type="submit">
+                                {{ __('Resend Verification Email') }}
+                            </x-button>
+                        </div>
+                    </form>
+                </div>
+            @endif
+        @endauth
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
