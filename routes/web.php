@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ Route::middleware([
 ])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/market-calendar', 'market-calendar')->name('market-calendar');
-    Route::view('/apply', 'apply')->name('apply');
+    Route::get('/apply', [ApplicationsController::class, 'index'])->name('apply');
     Route::view('/bookings', 'bookings')->name('bookings');
     Route::view('/receipts', 'receipts')->name('receipts');
 });

@@ -1,7 +1,7 @@
 <div>
     <form method="POST" wire:submit="apply">
         @csrf
-        @if (true)
+        @if (session()->has('success'))
             <div class="rounded-md bg-green-50 p-4 my-8">
                 <div class="flex">
                     <div class="flex-shrink-0">
@@ -13,7 +13,7 @@
                     </div>
                     <div class="ml-3">
                         <p class="text-sm leading-5 font-medium text-green-800">
-                            Success message goes here
+                            {{ session('success')  }}
                         </p>
                     </div>
                     <div class="ml-auto pl-3">
@@ -35,13 +35,16 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 content-start">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 content-start"
+            x-data="{ products: $wire.products, product: { id: '', name: '', ingredients: '' }, electricalDeviceFeatures: $wire.electrical_device_features, showElectricalDeviceFeatures: false }"
+        >
             <div class="">
                 <div class="flex">
                     <x-label for="business_name" value="{{ __('Stall/Business Name') }}" />
                     <span class="required">*</span>
                 </div>
-                <x-input wire:model="business_name" id="bbusiness_name" class="block mt-1 w-full" type="text" name="business_name" :value="old('business_name')" autofocus required autocomplete="organization" placeholder="My Business" />
+                <x-input wire:model="business_name" id="business_name" class="block mt-1 w-full" type="text" name="business_name" :value="old('business_name')" autofocus required autocomplete="organization" placeholder="My Business" />
                 @error('business_name') <span class="error">{{ $message }}</span> @enderror
             </div>
 
@@ -79,12 +82,12 @@
                 <p class="mt-1 text-sm leading-6 text-gray-600">Select the type of stand you require.</p>
                 <div class="mt-6 space-y-6">
                     <div class="flex items-center gap-x-3">
-                        <input id="stand-standard" name="stand-options" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" required>
-                        <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Standard &mdash; 3m &times; 2.5m @ R 320.00 per month</label>
+                        <input wire:model="stand_type" id="stand-standard" name="stand_type" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="standard" required @change="showElectricalDeviceFeatures = false">
+                        <label for="stand-standard" class="block text-sm font-medium leading-6 text-gray-900">Standard &mdash; 3m &times; 3m @ R 320.00 per month</label>
                     </div>
                     <div class="flex items-center gap-x-3">
-                        <input id="stand-electricity" name="stand-options" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                        <label for="push-email" class="block text-sm font-medium leading-6 text-gray-900">Electricity &mdash; 3m &times; 2.5m @ R 400.00 per month</label>
+                        <input wire:model="stand_type" id="stand-electricity" name="stand_type" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="electricity" @change="showElectricalDeviceFeatures = true">
+                        <label for="stand-electricity" class="block text-sm font-medium leading-6 text-gray-900">Electricity &mdash; 3m &times; 3m @ R 400.00 per month</label>
                     </div>
                 </div>
             </fieldset>
@@ -92,7 +95,7 @@
             <fieldset>
                 <div class="relative flex gap-x-3">
                     <div class="flex h-6 items-center">
-                        <input id="gas" name="gas" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        <input id="gas" name="gas" wire:model="gas" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                     </div>
                     <div class="text-sm leading-6">
                         <label for="gas" class="font-medium text-gray-900">I use gas</label>
@@ -101,7 +104,26 @@
                 </div>
             </fieldset>
 
-            <div class="col-span-2" x-data="{ products: $wire.products, product: { id: '', name: '', ingredients: '' } }">
+            <template x-if="showElectricalDeviceFeatures">
+                <div class="flex gap-4 space-evenly">
+                    <div class="w-full">
+                        <div class="flex">
+                            <x-label for="electrical_device_type" value="{{ __('Electrical device(s) type') }}" />
+                            <span class="required">*</span>
+                        </div>
+                        <x-input wire:model="electrical_device_features.type" id="electrical_device_type" class="block mt-1 w-full" type="text" name="electrical_device_type" :value="old('electrical_device_features[\'type\']')" autofocus required placeholder="E.g. Microwave, coffee machine" />
+                    </div>
+                    <div class="w-full">
+                        <div class="flex">
+                            <x-label for="electrical_device_amps" value="{{ __('Electrical device(s) amps') }}" />
+                            <span class="required">*</span>
+                        </div>
+                        <x-input wire:model="electrical_device_features.amps" id="electrical_device_amps" class="block mt-1 w-full" type="text" name="electrical_device_amps" :value="old('electrical_device_features[\'amps\']')" autofocus required placeholder="20 amps" />
+                    </div>
+                </div>
+            </template>
+
+            <div class="col-span-2">
                 <p class="text-sm font-semibold leading-6 text-gray-900">My products</p>
                 <p class="mt-1 text-sm leading-6 text-gray-600">Please add all of your products and their ingredients below. Samples may be requested before we approve your application. List all of the ingredients used in this product, including the oils you used to cook it in, if relevant.</p>
                 <div class="flex justify-evenly gap-4 mt-1">
@@ -145,6 +167,7 @@
                             </li>
                         </template>
                     </ul>
+                <x-input hidden wire:model="products" x-model="products"></x-input>
             </div>
 
             <x-button class="justify-self-start mt-8">
