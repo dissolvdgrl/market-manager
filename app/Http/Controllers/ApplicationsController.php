@@ -11,7 +11,7 @@ class ApplicationsController extends Controller
     {
         $user = auth()->user();
 
-        $has_applications = $user->application->exists();
+        $has_applications = $user->application()->exists();
 
         $applications = VendorApplication::select('business_name', 'created_at', 'status', 'products')
             ->where('user_id', $user->id)

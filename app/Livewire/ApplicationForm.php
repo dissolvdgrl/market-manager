@@ -30,18 +30,6 @@ class ApplicationForm extends Component
 
     public function apply()
     {
-
-        /*dd([
-            $this->business_name,
-            $this->phone_number,
-            $this->website,
-            $this->facebook_page,
-            $this->instagram_page,
-            $this->stand_type,
-            $this->electrical_device_features,
-            $this->gas,
-            $this->products,
-        ]);*/
         $this->validate();
 
         // Store the application in the database
@@ -59,6 +47,7 @@ class ApplicationForm extends Component
             ]);
 
         // Notify Market Admin
+
 
         // Notify applicant via email
 
