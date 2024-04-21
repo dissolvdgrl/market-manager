@@ -26,4 +26,8 @@ class VendorApplication extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $casts = [
+        'uses_gas' => 'boolean'
+    ];
 }

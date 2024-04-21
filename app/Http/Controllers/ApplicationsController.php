@@ -17,6 +17,12 @@ class ApplicationsController extends Controller
             ->where('user_id', $user->id)
             ->get();
 
-        return view('apply', compact('has_applications', 'applications'));
+        return view('applications.index', compact('has_applications', 'applications'));
+    }
+
+    public function show(int $id)
+    {
+        $application = VendorApplication::findOrFail($id);
+        return view('application', compact('application'));
     }
 }

@@ -187,4 +187,8 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'contact_details' => [
+        'phone' => env('APP_CONTACT_DETAILS_PHONE', ''),
+    ]
+
 ];

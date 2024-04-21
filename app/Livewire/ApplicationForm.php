@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Models\VendorApplication;
+use App\Notifications\ApplicationSubmitted;
+use App\Notifications\NewApplication;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -18,7 +21,7 @@ class ApplicationForm extends Component
     #[Validate('required')]
     public string $stand_type = '';
     public array $electrical_device_features = [];
-    public string $gas = '';
+    public int $gas = 0;
     #[Validate('required')]
     public array $products = [];
     public int $product_id = 1;
@@ -46,17 +49,32 @@ class ApplicationForm extends Component
                 'products' => json_encode($this->products),
             ]);
 
-        // Notify Market Admin
+        $this->notify_admin($user->id);
 
-
-        // Notify applicant via email
+        $this->notify_applicant();
 
         /* TODO
             3. When a pre-approved user submits an application, store it in db, notify the market admin, notify applicant, provide option to view application status.
             4. Allow market admin to change status of application. When status changes, notify applicant.
         */
 
-        session()->flash('success', 'Application submitted! We will be in touch with you soon.');
+        session()->flash('success', 'Application submitted! We have emailed you a copy of your application and will let you know once your application has been reviewed.');
+
         return $this->redirect('/apply');
     }
+
+    protected function notify_admin(int $user_id): void
+    {
+        $new_application = VendorApplication::where('user_id', $user_id)->first();
+        $admin = User::where('role', 4)->first();
+        $admin->notify(new NewApplication($new_application));
+    }
+
+    protected function notify_applicant(): void
+    {
+        $user = auth()->user();
+        $new_application = VendorApplication::where('user_id', $user->id)->first();
+        $user->notify(new ApplicationSubmitted($new_application, $user->name));
+    }
+
 }
