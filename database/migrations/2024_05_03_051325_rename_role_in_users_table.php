@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vendor_applications', function (Blueprint $table) {
-            $table->tinyInteger('uses_gas')->default(0);
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('role', 'role_id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vendor_applications', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

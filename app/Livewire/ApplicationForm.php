@@ -66,7 +66,10 @@ class ApplicationForm extends Component
     protected function notify_admin(int $user_id): void
     {
         $new_application = VendorApplication::where('user_id', $user_id)->first();
-        $admin = User::where('role', 4)->first();
+        $admin = User::whereHas('role', function ($query) {
+          $query->where('name', 'admin');
+        })->first();
+
         $admin->notify(new NewApplication($new_application));
     }
 
