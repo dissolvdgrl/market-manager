@@ -18,9 +18,16 @@
                     <x-nav-link href="{{ route('market-calendar') }}" :active="request()->routeIs('market-calendar')">
                         {{ __('Market Calendar') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
-                        {{ __('Apply') }}
-                    </x-nav-link>
+                    @if( auth()->user()->role->name->value == "admin" )
+                        <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
+                            {{ __('Applications') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
+                            {{ __('Apply') }}
+                        </x-nav-link>
+                    @endif
+
                     <x-nav-link href="{{ route('bookings') }}" :active="request()->routeIs('bookings')">
                         {{ __('Bookings') }}
                     </x-nav-link>

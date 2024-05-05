@@ -8,8 +8,10 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                @if(Auth::user()->role === 1 )
-                    <x-welcome></x-welcome>
+                @if( Auth::user()->role->name->value == 'pre_approved' )
+                <x-welcome></x-welcome>
+                @elseif( Auth::user()->role->name->value == 'approved' )
+                @elseif( Auth::user()->role->name->value == 'early_access' )
                 @endif
             </div>
         </div>

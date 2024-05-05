@@ -26,6 +26,7 @@ Route::middleware([
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/market-calendar', 'market-calendar')->name('market-calendar');
     Route::get('/apply', [ApplicationsController::class, 'index'])->name('apply');
+    Route::get('/applications/{id}', [ApplicationsController::class, 'show'])->name('apply.show');
     Route::view('/bookings', 'bookings')->name('bookings');
     Route::view('/receipts', 'receipts')->name('receipts');
 });

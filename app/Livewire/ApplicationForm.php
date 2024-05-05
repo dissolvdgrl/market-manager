@@ -54,7 +54,6 @@ class ApplicationForm extends Component
         $this->notify_applicant();
 
         /* TODO
-            3. When a pre-approved user submits an application, store it in db, notify the market admin, notify applicant, provide option to view application status.
             4. Allow market admin to change status of application. When status changes, notify applicant.
         */
 
