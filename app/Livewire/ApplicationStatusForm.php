@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\VendorApplication;
+use App\Notifications\ApplicationUpdated;
 use Livewire\Component;
 
 class ApplicationStatusForm extends Component
@@ -27,8 +28,16 @@ class ApplicationStatusForm extends Component
         $application->status = $this->application_status;
         $application->save();
 
+        $this->notify_applicant($application->id);
+
         session()->flash('success', 'Application updated! The applicant has been notified.');
 
         return $this->redirect("/applications/$this->application_id");
+    }
+
+    protected function notify_applicant($application_id): void
+    {
+        $application = VendorApplication::where('id', $application_id)->first();
+        $application->user->notify(new ApplicationUpdated($application, $application->user->name));
     }
 }

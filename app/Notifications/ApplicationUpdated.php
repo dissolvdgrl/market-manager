@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 
-class ApplicationSubmitted extends Notification
+class ApplicationUpdated extends Notification
 {
     use Queueable;
 
@@ -40,13 +40,15 @@ class ApplicationSubmitted extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $greeting = "Hello {$this->user_name},";
-        $url = url('/apply');
+        $url = config('app.url') . '/login';
         return (new MailMessage)
-                    ->greeting($greeting)
-                    ->line("We've received your application to sell at the market and it is currently being reviewed")
-                    ->line("You'll receive a notification like this one once we've updated your applicaiton status.")
-                    ->action('View application status', $url)
-                    ->line('Please do not hesitate to contact us if you have any questions or concerns.');
+            ->greeting($greeting)
+            ->line("Your application to become a vendor at Brooklyn's Banting Market has been updated.")
+            ->line("To manage your Brooklyn Banting Market vendor account, click the button below or copy and paste the URL provided into your browser.")
+            ->action('Log in', $url)
+            ->line("Make sure you have familiarised yourself with the market rules before booking your space.")
+            ->action('View rules', '/rules')
+            ->line('Please do not hesitate to contact us if you have any questions or concerns.');
     }
 
     /**

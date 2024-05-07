@@ -137,7 +137,7 @@
             </div>
 
             <div class="col-span-2 flex items-center gap-4">
-                <x-button class="justify-self-start">
+                <x-button wire:loading.attr="disabled" class="justify-self-start">
                     {{ __('Submit') }}
                 </x-button>
                 <div wire:loading class="spinner">
