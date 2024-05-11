@@ -3,9 +3,9 @@
 * ~~see profile~~
 ~~* edit profile~~
 * see market calendar page
-* see application form page
+~~* see application form page~~
 ~~* submit the application form~~
-* see bookings page
+* must not see bookings page
 
 ## Approved can
 * make a booking

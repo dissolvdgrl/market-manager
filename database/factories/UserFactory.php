@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,6 +31,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
+            'role_id' => 1 // default pre_approved role
         ];
     }
 
@@ -64,5 +66,14 @@ class UserFactory extends Factory
                 ->when(is_callable($callback), $callback),
             'ownedTeams'
         );
+    }
+
+    public function withAdminRole(): static
+    {
+        return $this->state(function (array $attributes) {
+           return [
+               'role_id' => 4,
+           ];
+        });
     }
 }

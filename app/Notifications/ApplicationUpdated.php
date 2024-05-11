@@ -42,6 +42,7 @@ class ApplicationUpdated extends Notification
         $greeting = "Hello {$this->user_name},";
         $url = config('app.url') . '/login';
         return (new MailMessage)
+            ->subject('Banting Market Application Updated')
             ->greeting($greeting)
             ->line("Your application to become a vendor at Brooklyn's Banting Market has been updated.")
             ->line("To manage your Brooklyn Banting Market vendor account, click the button below or copy and paste the URL provided into your browser.")

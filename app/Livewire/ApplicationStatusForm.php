@@ -28,6 +28,11 @@ class ApplicationStatusForm extends Component
         $application->status = $this->application_status;
         $application->save();
 
+        if ($application->status === 'approved')
+        {
+            dd($application->user);
+        }
+
         $this->notify_applicant($application->id);
 
         session()->flash('success', 'Application updated! The applicant has been notified.');

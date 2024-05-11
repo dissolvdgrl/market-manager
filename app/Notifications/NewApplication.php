@@ -40,10 +40,11 @@ class NewApplication extends Notification
         $url = url('/applications/'.$this->new_application->id);
 
         return (new MailMessage)
-                    ->greeting('Dear market administrator')
-                    ->line('Someone submitted a new application.')
-                    ->action('View online', $url)
-                    ->line('You should review it.');
+            ->subject('New Banting Market Vendor Application')
+            ->greeting('Dear market administrator')
+            ->line('Someone submitted a new application.')
+            ->action('View online', $url)
+            ->line('You should review it.');
     }
 
     /**

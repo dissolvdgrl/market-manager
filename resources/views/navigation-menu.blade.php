@@ -27,13 +27,14 @@
                             {{ __('Apply') }}
                         </x-nav-link>
                     @endif
-
-                    <x-nav-link href="{{ route('bookings') }}" :active="request()->routeIs('bookings')">
-                        {{ __('Bookings') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('receipts') }}" :active="request()->routeIs('receipts')">
-                        {{ __('My Receipts') }}
-                    </x-nav-link>
+                    @if( auth()->user()->role->name->value !== "pre_approved" )
+                        <x-nav-link href="{{ route('bookings') }}" :active="request()->routeIs('bookings')">
+                            {{ __('Bookings') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('receipts') }}" :active="request()->routeIs('receipts')">
+                            {{ __('My Receipts') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

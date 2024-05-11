@@ -22,7 +22,7 @@ it('redirects to the login page if user is not authenticated', function () {
 
 it('shows an account verification message if the user has not verified their email', function ($url) {
     // Add more routes as app grows
-    actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->unverified()->create());
 
     get($url)->assertSeeText('Please verify your email address to continue using the app.');
 })->with(['/user/profile']);
@@ -35,22 +35,23 @@ it('doesn\'t show an account verification reminder if the user has verified thei
 
 it('shows the profile page', function () {
     actingAs($user = User::factory()->create());
-    get('/user/profile')->assertOk();
+    get('/user/profile')->assertSeeText('Profile');
 });
 
 it('shows the market calendar overview page', function () {
     actingAs($user = User::factory()->create());
-    get('/market-calendar')->assertOk();
+    get('/market-calendar')->assertSee('Market Calendar');
 });
 
 it('shows the application form page', function () {
-    actingAs($user = User::factory()->create());
-    get('/apply')->assertOk();
+    $user = User::factory()->create();
+    actingAs($user);
+    get('/apply')->assertSee('Bookings');
 });
 
 it('shows the bookings page', function () {
     actingAs($user = User::factory()->create());
-    get('/bookings')->assertOk();
+    get('/bookings')->assertSee('Bookings');
 });
 
 it('shows a user\'s receipts page', function () {
