@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Enums\RoleEnum;
+use App\Models\Role;
 use App\Models\VendorApplication;
 use App\Notifications\ApplicationUpdated;
 use Livewire\Component;
@@ -30,7 +32,9 @@ class ApplicationStatusForm extends Component
 
         if ($application->status === 'approved')
         {
-            dd($application->user);
+            $role = Role::where('name', RoleEnum::APPROVED)->first();
+            $application->user->role_id = $role->id;
+            $application->user->save();
         }
 
         $this->notify_applicant($application->id);
