@@ -1,10 +1,10 @@
 ## Pre Approved can
 ~~* see dashboard page~~
-* see profile
-* edit profile
+* ~~see profile~~
+~~* edit profile~~
 * see market calendar page
 * see application form page
-* submit the application form
+~~* submit the application form~~
 * see bookings page
 
 ## Approved can
@@ -22,3 +22,6 @@
 * see all users' receipts
 * create market days
 * reserve stalls
+
+## General
+* View terms and conditions
