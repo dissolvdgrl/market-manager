@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,5 +70,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function application(): HasOne
     {
         return $this->hasOne(VendorApplication::class);
+    }
+
+    public function is_pre_approved()
+    {
+        return $this->role->name === RoleEnum::PRE_APPROVED;
     }
 }

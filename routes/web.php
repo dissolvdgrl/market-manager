@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Middleware\PreApproved;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,6 @@ Route::middleware([
     Route::view('/market-calendar', 'market-calendar')->name('market-calendar');
     Route::get('/apply', [ApplicationsController::class, 'index'])->name('apply');
     Route::get('/applications/{id}', [ApplicationsController::class, 'show'])->name('apply.show');
-    Route::view('/bookings', 'bookings')->name('bookings');
+    Route::view('/bookings', 'bookings')->middleware(PreApproved::class)->name('bookings');
     Route::view('/receipts', 'receipts')->name('receipts');
 });
