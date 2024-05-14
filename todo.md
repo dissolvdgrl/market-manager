@@ -5,7 +5,7 @@
 * see market calendar page
 ~~* see application form page~~
 ~~* submit the application form~~
-* must not see bookings page
+~~* must not see bookings page~~
 
 ## Approved can
 * make a booking
