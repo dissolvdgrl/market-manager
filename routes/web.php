@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Approved;
+use App\Http\Middleware\EarlyAccess;
 use App\Http\Middleware\PreApproved;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +26,9 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    Admin::class,
+    Approved::class,
+    EarlyAccess::class
 ])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/market-calendar', 'market-calendar')->name('market-calendar');

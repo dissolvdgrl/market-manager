@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class PreApproved
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class PreApproved
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ( !Auth::check() && !Auth::user()->is_pre_approved() )
+        if ( !Auth::check() && !Auth::user()->is_admin() )
         {
             // TODO - add a nicer error here
             abort(403);

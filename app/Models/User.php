@@ -76,4 +76,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role->name === RoleEnum::PRE_APPROVED;
     }
+
+    public function is_admin()
+    {
+        return $this->role->name === RoleEnum::ADMIN;
+    }
+
+    public function is_approved()
+    {
+        return $this->role->name === RoleEnum::APPROVED;
+    }
+
+    public function is_early_access()
+    {
+        return $this->role->name === RoleEnum::EARLY_ACCESS;
+    }
 }
