@@ -15,7 +15,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('market-calendar') }}" :active="request()->routeIs('market-calendar')">
+                    <x-nav-link href="{{ route('market-calendar.index') }}" :active="request()->routeIs('market-calendar.index')">
                         {{ __('Market Calendar') }}
                     </x-nav-link>
                     @if( auth()->user()->is_admin() )

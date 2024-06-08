@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\MarketDayController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Approved;
 use App\Http\Middleware\EarlyAccess;
@@ -31,7 +32,10 @@ Route::middleware([
     EarlyAccess::class
 ])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/market-calendar', 'market-calendar')->name('market-calendar');
+    Route::resource('market-calendar', MarketDayController::class)->names([
+        'index' => 'market-calendar.index',
+        'edit' => 'market-calendar.edit',
+    ]);
     Route::get('/apply', [ApplicationsController::class, 'index'])->name('apply');
     Route::get('/applications/{id}', [ApplicationsController::class, 'show'])->name('apply.show');
     Route::view('/bookings', 'bookings')->middleware(PreApproved::class)->name('bookings');

@@ -12,6 +12,15 @@
                 <x-welcome></x-welcome>
                 @elseif( Auth::user()->role->name->value == 'approved' )
                 @elseif( Auth::user()->role->name->value == 'early_access' )
+                @elseif( Auth::user()->role->name->value == 'admin' )
+                    <livewire:admin-dashboard />
+                    <!--
+                    show admin cards
+                        - Applications
+                        - Calendar
+                        - Users
+                    -->
+
                 @endif
             </div>
         </div>

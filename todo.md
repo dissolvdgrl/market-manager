@@ -1,8 +1,8 @@
 ## Pre Approved can
 ~~* see dashboard page~~
-* ~~see profile~~
+~~*~~ ~~see profile~~
 ~~* edit profile~~
-* see market calendar page
+~~* see market calendar page~~
 ~~* see application form page~~
 ~~* submit the application form~~
 ~~* must not see bookings page~~
