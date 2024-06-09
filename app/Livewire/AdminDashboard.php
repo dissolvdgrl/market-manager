@@ -9,7 +9,7 @@ class AdminDashboard extends Component
 {
     public function render()
     {
-        $market_days = MarketDay::select('date', 'start_time', 'end_time')
+        $market_days = MarketDay::select('id', 'date', 'start_time', 'end_time')
             ->where('date', '>', now())
             ->orderBy('date', 'asc')
             ->limit(3)

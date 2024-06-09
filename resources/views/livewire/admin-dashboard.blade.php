@@ -2,7 +2,7 @@
     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-8">Upcoming markets</h2>
     <div class="divide-y divide-gray-300">
         @foreach($market_days as $market_day)
-            <x-market-day-card :date="$market_day->date" :start="$market_day->start_time" :end="$market_day->end_time" />
+            <x-market-day-card :id="$market_day->id" :date="$market_day->date" :start="$market_day->start_time" :end="$market_day->end_time" />
         @endforeach
     </div>
     <a href="{{ route('market-calendar.index') }}" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
