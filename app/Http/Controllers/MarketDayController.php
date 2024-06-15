@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\MarketDay;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MarketDayController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->user()->cannot('viewAny', MarketDay::class)) {
+            abort(403);
+        }
+
         $market_days = MarketDay::select('id', 'date', 'start_time', 'end_time')
             ->where('date', '>', now())
             ->orderBy('date', 'asc')
@@ -49,6 +56,7 @@ class MarketDayController extends Controller
      */
     public function edit(int $id)
     {
+        $this->authorize('update', MarketDay::class);
         $market_day = MarketDay::where('id', $id)->firstOrFail();
         return view('market-calendar.edit', compact('market_day'));
     }
