@@ -25,6 +25,8 @@ class MarketDayCreateForm extends Component
         $marketDay->end_time = new Carbon($this->end);
         $marketDay->save();
 
-        // TODO: show flash message
+        session()->flash('success-market', 'Market day created.');
+
+        return $this->redirect('/market-calendar');
     }
 }
