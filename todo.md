@@ -20,7 +20,7 @@
 * update a user's role
 * see all bookings
 * see all users' receipts
-* create market days
+~~* create market days~~
 * reserve stalls
 
 ## General
