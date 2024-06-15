@@ -35,6 +35,7 @@ Route::middleware([
     Route::resource('market-calendar', MarketDayController::class)->names([
         'index' => 'market-calendar.index',
         'edit' => 'market-calendar.edit',
+        'destroy' => 'market-calendar.destroy',
     ]);
     Route::get('/apply', [ApplicationsController::class, 'index'])->name('apply');
     Route::get('/applications/{id}', [ApplicationsController::class, 'show'])->name('apply.show');

@@ -64,8 +64,15 @@ class MarketDayController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MarketDay $marketDay)
+    public function destroy(int $id)
     {
-        //
+        $marketDay = MarketDay::where('id', '=', $id)->first();
+
+        // TODO: first check if there aren't any bookings associated with this market day
+
+        $marketDay->delete();
+
+        session()->flash('success', 'Market day deleted.');
+        return redirect('/market-calendar');
     }
 }
