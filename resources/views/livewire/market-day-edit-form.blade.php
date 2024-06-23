@@ -12,7 +12,9 @@
         <input type="date" id="market_date" name="market_date" min="{{ date('Y-m-d', strtotime((now()))) }}" required value="{{ date('Y-m-d', strtotime($date)) }}" wire:model="date" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block" />
     </div>
 
-    <x-button>
-        {{ __('Save') }}
-    </x-button>
+    <div class="flex gap-4">
+        <x-button>{{ __('Save') }}</x-button>
+        <x-button-link href="{{ url()->previous() }}">Cancel</x-button-link>
+    </div>
+
 </form>
