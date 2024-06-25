@@ -27,6 +27,7 @@ class MarketDayEditForm extends Component
 
     public function store(int $id)
     {
+        $this->authorize('update', MarketDay::class);
         $market_day = MarketDay::find($id);
         $market_day->start_time = Carbon::parse($this->date . $this->start);
         $market_day->end_time = Carbon::parse($this->date . $this->end);
