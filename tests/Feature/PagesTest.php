@@ -135,6 +135,28 @@ it('shows the bookings page', function () {
     get('/bookings')->assertSee('Bookings');
 });
 
+it('shows the vendors page as an admin', function () {
+    $user = User::factory()->create();
+    addRole($user, RoleEnum::SUPER_ADMIN);
+    actingAs($user)->get('/vendors')->assertStatus(200);
+});
+
+it('throws a 403 when the user is not an admin', function () {
+    $user = User::factory()->create();
+    addRole($user, RoleEnum::EARLY_ACCESS);
+    actingAs($user)->get('/vendors')->assertStatus(403);
+});
+
+it('shows a pre-approved vendor\'s detail page to an admin', function () {
+    $user = User::factory()->create();
+    $vendor = User::factory()->create();
+
+    addRole($user, RoleEnum::ADMIN);
+    addRole($vendor, RoleEnum::PRE_APPROVED);
+
+    actingAs($user)->get("/vendors/$vendor->id")->assertStatus(200);
+});
+
 /*it('shows a user\'s receipts page', function () {
     actingAs($user = User::factory()->create());
     get('/receipts')->assertOk();

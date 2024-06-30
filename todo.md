@@ -17,6 +17,7 @@
 * Receive email notifications about bookings being open
 
 ## Admin can
+~~* can see all vendors~~
 * update a user's role
 * see all bookings
 * see all users' receipts

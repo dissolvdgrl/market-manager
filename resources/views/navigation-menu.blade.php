@@ -35,6 +35,11 @@
                             {{ __('My Receipts') }}
                         </x-nav-link>
                     @endif
+                    @if( auth()->user()->role->name->value === "admin" )
+                        <x-nav-link href="{{ route('vendors.index') }}" :active="request()->routeIs('vendors')">
+                            {{ __('Vendors') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\MarketDayController;
+use App\Http\Controllers\VendorsController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Approved;
 use App\Http\Middleware\EarlyAccess;
@@ -41,4 +42,12 @@ Route::middleware([
     Route::get('/applications/{id}', [ApplicationsController::class, 'show'])->name('apply.show');
     Route::view('/bookings', 'bookings')->middleware(PreApproved::class)->name('bookings');
     Route::view('/receipts', 'receipts')->name('receipts');
+    Route::resource('/vendors', VendorsController::class)->middleware(Admin::class)->names([
+        'index' => 'vendors.index',
+        'create' => 'vendors.create',
+        'store' => 'vendors.store',
+        'show' => 'vendors.show',
+        'edit' => 'vendors.edit',
+        'destroy' => 'vendors.destroy',
+    ]);
 });

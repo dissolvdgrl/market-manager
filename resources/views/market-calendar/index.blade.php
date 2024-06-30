@@ -38,7 +38,7 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-8">Add a new date</h2>
                     <livewire:market-day-create-form />
                 </div>
-                @endcan
+            @endcan
         </div>
     </div>
 </x-app-layout>
