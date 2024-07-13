@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-
+                @if(count($applications) > 0)
                 <div class="p-6 lg:p-8 divide-y">
                     @foreach($applications as $application)
                         <div class="grid grid-cols-4 items-center py-6">
@@ -28,6 +28,11 @@
                         </div>
                     @endforeach
                 </div>
+                @else
+                    <div class="p-6 lg:p-8 divide-y">
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">There aren't any applications right now, please check again later.</h2>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

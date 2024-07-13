@@ -41,6 +41,7 @@ class ApplicationUpdated extends Notification
     {
         $greeting = "Hello {$this->user_name},";
         $url = config('app.url') . '/login';
+        $terms = config('app.url') . '/terms-of-service';
         return (new MailMessage)
             ->subject('Banting Market Application Updated')
             ->greeting($greeting)
@@ -48,7 +49,7 @@ class ApplicationUpdated extends Notification
             ->line("To manage your Brooklyn Banting Market vendor account, click the button below or copy and paste the URL provided into your browser.")
             ->action('Log in', $url)
             ->line("Make sure you have familiarised yourself with the market rules before booking your space.")
-            ->action('View rules', '/rules')
+            ->action('View rules', $terms)
             ->line('Please do not hesitate to contact us if you have any questions or concerns.');
     }
 

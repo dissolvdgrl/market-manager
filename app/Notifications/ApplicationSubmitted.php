@@ -42,10 +42,10 @@ class ApplicationSubmitted extends Notification
         $greeting = "Hello {$this->user_name},";
         $url = url('/apply');
         return (new MailMessage)
-            ->subject('Banting Market Application Details')
+            ->subject('Your Banting Market Application Details')
             ->greeting($greeting)
-            ->line("We've received your application to sell at the market and it is currently being reviewed")
-           ->line("You'll receive a notification like this one once we've updated your applicaiton status.")
+            ->line("We've received your application to sell at the market and it is currently being reviewed.")
+           ->line("You'll receive a notification like this one once we've updated your application status.")
            ->action('View application status', $url)
            ->line('Please do not hesitate to contact us if you have any questions or concerns.');
     }

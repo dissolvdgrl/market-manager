@@ -9,7 +9,7 @@
         <div class="max-w-7xl grid grid-cols-2 gap-8 items-start mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-4">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-8">Upcoming markets</h2>
-                @if (session()->has('success'))
+                @if (session()->has('success-market'))
                     <div class="rounded-md bg-green-50 p-4 w-full">
                         <div class="flex">
                             <div class="flex-shrink-0">
@@ -21,7 +21,7 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-sm leading-5 font-medium text-green-800">
-                                    {{ session('success')  }}
+                                    {{ session('success-market')  }}
                                 </p>
                             </div>
                         </div>
