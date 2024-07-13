@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Role extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
       'name',
