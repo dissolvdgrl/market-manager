@@ -27,7 +27,7 @@
                             {{ __('Apply') }}
                         </x-nav-link>
                     @endif
-                    @if( auth()->user()->role->name->value !== "pre_approved" )
+                    @if( !auth()->user()->is_pre_approved() )
                         <x-nav-link href="{{ route('bookings') }}" :active="str_contains(Route::currentRouteName(), 'bookings')">
                             {{ __('Bookings') }}
                         </x-nav-link>
@@ -35,7 +35,7 @@
                             {{ __('My Receipts') }}
                         </x-nav-link>
                     @endif
-                    @if( auth()->user()->role->name->value === "admin" )
+                    @if( auth()->user()->is_admin() )
                         <x-nav-link href="{{ route('vendors.index') }}" :active="str_contains(Route::currentRouteName(), 'vendors')">
                             {{ __('Vendors') }}
                         </x-nav-link>
@@ -164,9 +164,34 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="str_contains(Route::currentRouteName(), 'dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('market-calendar.index') }}" :active="str_contains(Route::currentRouteName(), 'market-calendar')">
+                {{ __('Market Calendar') }}
+            </x-responsive-nav-link>
+            @if( auth()->user()->is_admin() )
+                <x-responsive-nav-link href="{{ route('apply') }}" :active="str_contains(Route::currentRouteName(), 'apply')">
+                    {{ __('Applications') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link href="{{ route('apply') }}" :active="str_contains(Route::currentRouteName(), 'apply')">
+                    {{ __('Apply') }}
+                </x-responsive-nav-link>
+            @endif
+            @if( !auth()->user()->is_pre_approved() )
+                <x-responsive-nav-link href="{{ route('bookings') }}" :active="str_contains(Route::currentRouteName(), 'bookings')">
+                    {{ __('Bookings') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('receipts') }}" :active="str_contains(Route::currentRouteName(), 'receipts')">
+                    {{ __('My Receipts') }}
+                </x-responsive-nav-link>
+            @endif
+            @if( auth()->user()->is_admin() )
+                <x-responsive-nav-link href="{{ route('vendors.index') }}" :active="str_contains(Route::currentRouteName(), 'vendors')">
+                    {{ __('Vendors') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
