@@ -12,31 +12,31 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('dashboard') }}" :active="str_contains(Route::currentRouteName(), 'dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('market-calendar.index') }}" :active="request()->routeIs('market-calendar.index')">
+                    <x-nav-link href="{{ route('market-calendar.index') }}" :active="str_contains(Route::currentRouteName(), 'market-calendar')">
                         {{ __('Market Calendar') }}
                     </x-nav-link>
                     @if( auth()->user()->is_admin() )
-                        <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
+                        <x-nav-link href="{{ route('apply') }}" :active="str_contains(Route::currentRouteName(), 'apply')">
                             {{ __('Applications') }}
                         </x-nav-link>
                     @else
-                        <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
+                        <x-nav-link href="{{ route('apply') }}" :active="str_contains(Route::currentRouteName(), 'apply')">
                             {{ __('Apply') }}
                         </x-nav-link>
                     @endif
                     @if( auth()->user()->role->name->value !== "pre_approved" )
-                        <x-nav-link href="{{ route('bookings') }}" :active="request()->routeIs('bookings')">
+                        <x-nav-link href="{{ route('bookings') }}" :active="str_contains(Route::currentRouteName(), 'bookings')">
                             {{ __('Bookings') }}
                         </x-nav-link>
-                        <x-nav-link href="{{ route('receipts') }}" :active="request()->routeIs('receipts')">
+                        <x-nav-link href="{{ route('receipts') }}" :active="str_contains(Route::currentRouteName(), 'receipts')">
                             {{ __('My Receipts') }}
                         </x-nav-link>
                     @endif
                     @if( auth()->user()->role->name->value === "admin" )
-                        <x-nav-link href="{{ route('vendors.index') }}" :active="request()->routeIs('vendors')">
+                        <x-nav-link href="{{ route('vendors.index') }}" :active="str_contains(Route::currentRouteName(), 'vendors')">
                             {{ __('Vendors') }}
                         </x-nav-link>
                     @endif
