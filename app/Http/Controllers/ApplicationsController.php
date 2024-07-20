@@ -11,7 +11,7 @@ class ApplicationsController extends Controller
     {
         $user = auth()->user();
 
-        if ( auth()->user()->role->name->value == "admin" )
+        if ( $user->is_admin() )
         {
             $applications = VendorApplication::select('id', 'business_name', 'created_at', 'status')->get();
 
@@ -36,7 +36,6 @@ class ApplicationsController extends Controller
         {
             $electricity_details = json_decode($application->electricity_details, true);
         }
-
 
         return view('applications.show', compact('application', 'electricity_details'));
     }

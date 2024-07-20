@@ -27,11 +27,16 @@
                         </div>
                     </div>
                 @endif
-                <div class="divide-y divide-gray-300">
-                    @foreach($market_days as $market_day)
-                        <x-market-day-card :id="$market_day->id" :date="$market_day->date" :start="$market_day->start_time" :end="$market_day->end_time" />
-                    @endforeach
-                </div>
+
+                @if(count($market_days) == 0)
+                    No market days yet, please check back later!
+                @else
+                    <div class="divide-y divide-gray-300">
+                        @foreach($market_days as $market_day)
+                            <x-market-day-card :id="$market_day->id" :date="$market_day->date" :start="$market_day->start_time" :end="$market_day->end_time" />
+                        @endforeach
+                    </div>
+                @endif
             </div>
             @can('create', App\Models\MarketDay::class)
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-4">

@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 use App\Enums\RoleEnum;
 use Illuminate\Database\Migrations\Migration;

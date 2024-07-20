@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -77,7 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role->name === RoleEnum::PRE_APPROVED;
     }
 
-    public function is_admin()
+    public function is_admin() : bool
     {
         return ($this->role->name === RoleEnum::ADMIN || $this->role->name === RoleEnum::SUPER_ADMIN);
     }

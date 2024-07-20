@@ -15,6 +15,7 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [RoleEnum::PRE_APPROVED, ROleEnum::APPROVED, RoleEnum::EARLY_ACCESS, RoleEnum::ADMIN, RoleEnum::SUPER_ADMIN];
+
         foreach ($roles as $role) {
             $new_role = new Role([
                 'name' => $role->value,
