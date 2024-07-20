@@ -1,9 +1,13 @@
 <div class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
 
+    <div class="-rotate-2 relative">
+        <p class="font-serif font-bold text-2xl relative z-20">Start here</p>
+        <span class="p-1.5 bg-indigo-200 absolute top-2 -left-2 z-10 w-28"></span>
+    </div>
+
     <h1 class="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
         Welcome to your Banting Market dashboard!
     </h1>
-
     <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
         To start making bookings for upcoming markets, you need to <strong>apply</strong> and <strong>get
             approved</strong>. Once approved, you will be able to book a stall at upcoming markets, make online payments for bookings, and view and download receipts.
