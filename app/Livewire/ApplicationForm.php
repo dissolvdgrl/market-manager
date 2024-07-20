@@ -34,8 +34,7 @@ class ApplicationForm extends Component
     public function apply()
     {
         $this->validate();
-
-        // Store the application in the database
+        
         $user = auth()->user();
         $user->application()->create([
                 'business_name' => $this->business_name,
@@ -52,10 +51,6 @@ class ApplicationForm extends Component
         $this->notify_admin($user->id);
 
         $this->notify_applicant();
-
-        /* TODO
-            4. Allow market admin to change status of application. When status changes, notify applicant.
-        */
 
         session()->flash('success', 'Application submitted! We have emailed you a copy of your application and will let you know once your application has been reviewed.');
 

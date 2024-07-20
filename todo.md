@@ -6,6 +6,8 @@
 ~~* see application form page~~
 ~~* submit the application form~~
 ~~* must not see bookings page~~
+* dispute a rejected application
+* amend application if rejected (submit as new)
 
 ## Approved can
 * make a booking

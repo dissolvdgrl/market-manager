@@ -10,12 +10,12 @@ use Livewire\Component;
 
 class ApplicationStatusForm extends Component
 {
-    public int $application_id;
+    public VendorApplication $application;
     public string $application_status;
 
-    public function mount($application_id, $application_status)
+    public function mount($application, $application_status)
     {
-        $this->application_id = $application_id;
+        $this->application = $application;
         $this->application_status = $application_status;
     }
 
@@ -26,27 +26,35 @@ class ApplicationStatusForm extends Component
 
     public function updateApplicationStatus()
     {
-        $application = VendorApplication::where('id', $this->application_id)->first();
-        $application->status = $this->application_status;
-        $application->save();
+        $this->application->status = $this->application_status;
+        $this->application->save();
 
-        if ($application->status === 'approved')
-        {
-            $role = Role::where('name', RoleEnum::APPROVED)->first();
-            $application->user->role_id = $role->id;
-            $application->user->save();
+        switch ($this->application_status) {
+            case 'approved':
+                $this->update_applicant_role(RoleEnum::APPROVED);
+                break;
+            case 'pending':
+            case 'rejected':
+                $this->update_applicant_role(RoleEnum::PRE_APPROVED);
+                break;
         }
 
-        $this->notify_applicant($application->id);
+        $this->notify_applicant($this->application->id);
 
         session()->flash('success', 'Application updated! The applicant has been notified.');
 
-        return $this->redirect("/applications/$this->application_id");
+        return $this->redirect("/applications/" . $this->application->id);
+    }
+
+    protected function update_applicant_role(RoleEnum $role): void
+    {
+        $role = Role::where('name', $role)->first();
+        $this->application->user->role_id = $role->id;
+        $this->application->user->save();
     }
 
     protected function notify_applicant($application_id): void
     {
-        $application = VendorApplication::where('id', $application_id)->first();
-        $application->user->notify(new ApplicationUpdated($application, $application->user->name));
+        $this->application->user->notify(new ApplicationUpdated($this->application, $this->application->user->name));
     }
 }

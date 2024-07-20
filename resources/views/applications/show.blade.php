@@ -34,7 +34,7 @@
                         <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Here is the info you submitted when you applied to sell at the market.</p>
                         @endif
                         @if(Auth::user()->role->name->value == 'admin')
-                            <livewire:application-status-form :application_id="$application->id" :application_status="$application->status" />
+                            <livewire:application-status-form :application="$application" :application_status="$application->status" />
                         @endif
                     </div>
                     <div class="mt-6 border-t border-gray-100">
@@ -53,15 +53,33 @@
                             </div>
                             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt class="text-sm font-medium leading-6 text-gray-900">Website</dt>
-                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $application->website }}</dd>
+                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                    @if($application->website)
+                                        {{ $application->website }}
+                                    @else
+                                        &mdash;
+                                    @endif
+                                </dd>
                             </div>
                             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt class="text-sm font-medium leading-6 text-gray-900">Facebook Page</dt>
-                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $application->facebook }}</dd>
+                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                    @if($application->facebook)
+                                        {{ $application->facebook }}
+                                    @else
+                                        &mdash;
+                                    @endif
+                                </dd>
                             </div>
                             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt class="text-sm font-medium leading-6 text-gray-900">Instagram Page</dt>
-                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $application->instagram }}</dd>
+                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                    @if($application->instagram)
+                                        {{ $application->instagram }}
+                                    @else
+                                        &mdash;
+                                    @endif
+                                </dd>
                             </div>
                             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt class="text-sm font-medium leading-6 text-gray-900">Do you use gas?</dt>
