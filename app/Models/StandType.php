@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class StandType extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'number',
+        'price',
     ];
 
     protected $casts = [

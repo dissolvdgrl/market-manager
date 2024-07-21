@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\MarketDayController;
+use App\Http\Controllers\StandTypesController;
 use App\Http\Controllers\VendorsController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Approved;
@@ -49,5 +50,13 @@ Route::middleware([
         'show' => 'vendors.show',
         'edit' => 'vendors.edit',
         'destroy' => 'vendors.destroy',
+    ]);
+    Route::resource('/stands/types', StandTypesController::class)->middleware(Admin::class)->names([
+        'index' => 'stands.types.index',
+        'create' => 'stands.types.create',
+        'store' => 'stands.types.store',
+        'show' => 'stands.types.show',
+        'edit' => 'stands.types.edit',
+        'update' => 'stands.types.update',
     ]);
 });
