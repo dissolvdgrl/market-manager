@@ -19,6 +19,9 @@
                         {{ __('Market Calendar') }}
                     </x-nav-link>
                     @if( auth()->user()->is_admin() )
+                        <x-nav-link href="{{ route('stands.types.index') }}" :active="str_contains(Route::currentRouteName(), 'types')">
+                            {{ __('Stand Types') }}
+                        </x-nav-link>
                         <x-nav-link href="{{ route('apply') }}" :active="str_contains(Route::currentRouteName(), 'apply')">
                             {{ __('Applications') }}
                         </x-nav-link>

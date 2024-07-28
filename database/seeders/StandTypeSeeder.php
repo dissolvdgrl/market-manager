@@ -14,12 +14,21 @@ class StandTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $stand_types = [StandTypeEnum::ELECTRICITY, StandTypeEnum::STANDARD];
+        $stand_types = [
+            [
+                'type' => StandTypeEnum::ELECTRICITY,
+                'price' => 400.00,
+            ],
+            [
+                'type' => StandTypeEnum::STANDARD,
+                'price' => 320.00,
+            ]
+        ];
 
-        foreach ($stand_types as $type) {
+        foreach ($stand_types as $stand_type) {
             $new_type = new StandType([
-                'name' => $type->value,
-                'price' => 0,
+                'name' => $stand_type['type']->value,
+                'price' => $stand_type['price']
             ]);
             $new_type->save();
         }
