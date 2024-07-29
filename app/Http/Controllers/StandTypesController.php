@@ -10,13 +10,7 @@ class StandTypesController extends Controller
 {
     public function index(Request $request)
     {
-
-        if($request->user()->cannot('viewAny', StandType::class)) {
-            abort(403);
-        }
-
-        $stand_types = StandType::all();
-        return view('stands.types.index', compact('stand_types'));
+        //
     }
 
     public function create()
@@ -56,7 +50,7 @@ class StandTypesController extends Controller
 
         session()->flash('success-stand-type', 'Stand type updated successfully.');
 
-        return redirect()->route('stands.types.index');
+        return redirect()->route('stands.index');
     }
 
     public function destroy(int $id)
