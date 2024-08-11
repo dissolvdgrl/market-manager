@@ -15,6 +15,8 @@ class ApplicationUpdated extends Notification
 
     protected $application;
     protected $user_name;
+    protected $status;
+    protected $note;
 
     /**
      * Create a new notification instance.
@@ -23,6 +25,8 @@ class ApplicationUpdated extends Notification
     {
         $this->application = $application;
         $this->user_name = $user_name;
+        $this->status = $application->status;
+        $this->note = $application->note;
     }
 
     /**
@@ -43,12 +47,19 @@ class ApplicationUpdated extends Notification
         $greeting = "Hello $this->user_name,";
         $url = config('app.url') . '/login';
         $terms = config('app.url') . '/terms-of-service';
+        $status = ucfirst($this->status);
+        $note = $this->note === ""
+            ? ""
+            : new HtmlString("Message from the organiser: <span style=\"font-style:italic;\">$this->note</span>") ;
+
         return (new MailMessage)
             ->subject('Banting Market Application Updated')
             ->greeting($greeting)
-            ->line("Your application to become a vendor at Brooklyn's Banting Market has been updated. To manage your Brooklyn Banting Market vendor account, please click the button to log in.")
+            ->line(new HtmlString("Your application to become a vendor at Brooklyn's Banting Market has been updated: <strong>$status</strong>"))
+            ->line($note)
+            ->line("To manage your Brooklyn Banting Market vendor account, please click the button to log in.")
             ->action('Log in', $url)
-             ->line(new HtmlString("Make sure you have familiarised yourself with the <a href=\"$terms\" class=\"display:block; margin: 0 auto; width: 180px;\">market rules</a>"))
+             ->line(new HtmlString("Make sure you have familiarised yourself with the <a href=\"$terms\" style=\"display:block; margin: 0 auto; width: 180px;\">market rules</a>"))
             ->line('Please do not hesitate to contact us if you have any questions or concerns.');
     }
 

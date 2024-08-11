@@ -12,11 +12,13 @@ class ApplicationStatusForm extends Component
 {
     public VendorApplication $application;
     public string $application_status;
+    public string $application_note;
 
-    public function mount($application, $application_status)
+    public function mount($application)
     {
         $this->application = $application;
-        $this->application_status = $application_status;
+        $this->application_status = $application->status;
+        $this->application_note = $application->note;
     }
 
     public function render()
@@ -27,7 +29,7 @@ class ApplicationStatusForm extends Component
     public function updateApplicationStatus()
     {
         $this->application->status = $this->application_status;
-        $this->application->save();
+        $this->application->note = $this->application_note;
 
         switch ($this->application_status) {
             case 'approved':
@@ -38,6 +40,8 @@ class ApplicationStatusForm extends Component
                 $this->update_applicant_role(RoleEnum::PRE_APPROVED);
                 break;
         }
+
+        $this->application->save();
 
         $this->notify_applicant($this->application->id);
 
@@ -50,7 +54,6 @@ class ApplicationStatusForm extends Component
     {
         $role = Role::where('name', $role)->first();
         $this->application->user->role_id = $role->id;
-        $this->application->user->save();
     }
 
     protected function notify_applicant($application_id): void

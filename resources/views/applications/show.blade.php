@@ -34,7 +34,7 @@
                         <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Here is the info you submitted when you applied to sell at the market.</p>
                         @endif
                         @if(Auth::user()->role->name->value == 'admin')
-                            <livewire:application-status-form :application="$application" :application_status="$application->status" />
+                            <livewire:application-status-form :application="$application" />
                         @endif
                     </div>
                     <div class="mt-6 border-t border-gray-100">
