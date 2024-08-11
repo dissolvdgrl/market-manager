@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\HtmlString;
 
 class ApplicationUpdated extends Notification
 {
@@ -39,17 +40,15 @@ class ApplicationUpdated extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $greeting = "Hello {$this->user_name},";
+        $greeting = "Hello $this->user_name,";
         $url = config('app.url') . '/login';
         $terms = config('app.url') . '/terms-of-service';
         return (new MailMessage)
             ->subject('Banting Market Application Updated')
             ->greeting($greeting)
-            ->line("Your application to become a vendor at Brooklyn's Banting Market has been updated.")
-            ->line("To manage your Brooklyn Banting Market vendor account, click the button below or copy and paste the URL provided into your browser.")
+            ->line("Your application to become a vendor at Brooklyn's Banting Market has been updated. To manage your Brooklyn Banting Market vendor account, please click the button to log in.")
             ->action('Log in', $url)
-            ->line("Make sure you have familiarised yourself with the market rules before booking your space.")
-            ->action('View rules', $terms)
+             ->line(new HtmlString("Make sure you have familiarised yourself with the <a href=\"$terms\" class=\"display:block; margin: 0 auto; width: 180px;\">market rules</a>"))
             ->line('Please do not hesitate to contact us if you have any questions or concerns.');
     }
 
