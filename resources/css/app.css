@@ -69,3 +69,7 @@
           transform: scale(1.0);
       }
 }
+
+.error {
+    @apply text-red-700 text-xs font-bold;
+}

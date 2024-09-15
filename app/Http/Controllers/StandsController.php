@@ -13,7 +13,7 @@ class StandsController extends Controller
      */
     public function index()
     {
-        $stands = Stand::all();
+        $stands = Stand::orderBy('number', 'desc')->get();
         $stand_types = StandType::all();
         return view('stands.index', compact('stands', 'stand_types'));
     }

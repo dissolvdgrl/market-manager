@@ -30,7 +30,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @error('price') <span class="error">{{ $message }}</span> @enderror
+                            @error('stand_type') <span class="error">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="flex gap-4 mt-4">

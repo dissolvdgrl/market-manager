@@ -56,10 +56,13 @@
                     @endforeach
                 </div>
             </div>
-            <div>
-                <livewire:stand-create-form />
+            <div class="flex flex-col gap-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-4">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-8">Stand types</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Create a stand</h2>
+                    <livewire:stand-create-form />
+                </div>
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-4">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Stand types</h2>
                     @if (session()->has('success-stand-type'))
                         <div class="rounded-md bg-green-50 p-4 w-full">
                             <div class="flex">

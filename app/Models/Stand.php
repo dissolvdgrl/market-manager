@@ -12,7 +12,7 @@ class Stand extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'stand_number',
+        'number',
         'stand_type_id',
     ];
 
